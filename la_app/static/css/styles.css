@@ -1,0 +1,110 @@
+body > header, body > main, body > footer {
+    padding: 16px;
+}
+
+section.container {
+    min-height: calc(100wh - 90px);
+}
+
+header, footer {
+    background-color: var(--background);
+}
+
+header {
+    display: grid;
+    grid-template-columns: auto 25%;
+}
+
+.header_kakebo {
+    display: flex;
+    align-items: center;
+}
+
+.header_title {
+    font-size:2em;
+    font-weight: bold;
+    color: var(--primary);
+    text-align: center;
+}
+
+.title {
+    line-height: 30px;
+    margin: var(--button-spacing-vertical) 0;
+}
+
+.title_text {
+    margin: var(--button-spacing-vertical) 0;
+}
+
+.title_button-new {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+nav {
+    display: flex;
+    justify-content: flex-end;
+}
+th.fecha {
+    width: 20%;
+} 
+
+th.concepto {
+    width: 50%;
+}
+
+th.importe, td.importe {
+    width: 25%;
+    text-align: right;
+}
+
+th.acciones {
+    width: 10%;
+}
+
+td.total {
+    text-align: right;
+    color: var(--contrast-hover);
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.container {
+    margin-top: 30px;
+    min-height: calc(100vh - 194px);
+}
+
+.err-msg {
+    color: var(--invalid);
+    font-size: 0.8em;
+    font-weight: bold;
+    padding: 0;
+    margin: 0
+}
+
+.error-data {
+    margin-bottom: 0 !important;
+    border-color: var(--invalid);
+}
+
+a.add-movement {
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    padding: 15px;
+}
+
+.calculadora {
+    font-family: "FontAwesome";
+    width: 80px;
+}
+
+.label {
+    font-weight: bold;
+}
+
+.hidden {
+    visibility: hidden;
+}

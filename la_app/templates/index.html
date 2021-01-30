@@ -1,0 +1,105 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba Errores</title>
+    <link rel="stylesheet" href="/static/css/font-awesome.css">
+    <link rel="stylesheet" href="/static/css/pico.css">
+    <link rel="stylesheet" href="/static/css/styles.css"> 
+</head>
+<body>
+    <div class="container">
+        <h1>Formulario de prueba</h1>
+        {% for mensaje in mensajes %}
+            <p class="err-msg">{{ mensaje }}</p>
+        {% endfor %}
+        <form action="/" method="post">
+            {{ form.hidden_tag() }}
+            {% set isAccept = form.quantity_to.data %}
+            
+            {% for message in messages %}
+            <p class="err-msg">{{message}}</p>
+            {% endfor %}
+            <div class="grid">
+                <label for="currencys_from">
+                    {{ form.currencys_from.label(class="label") }}
+                    {% if isAccept %}
+                        {{ form.currencys_from.data }}
+                        {{ form.currencys_from(class="hidden") }}
+                    {% else %}
+                        {{ form.currencys_from() }}
+                    {% endif %}
+                    {% for error in form.currencys_from.errors %}
+                        <p class="err-msg">{{error}}</p>
+                    {% endfor %}
+                </label>
+                <label for="quantity_from">
+                    {{ form.quantity_from.label(class="label") }}
+                    {% if isAccept %}
+                        {{ form.quantity_from.data }}
+                        {{ form.quantity_from(type="hidden") }}
+                    {% else %}
+                        {{ form.quantity_from() }}
+                    {% endif %}
+                    {% for error in form.quantity_from.errors %}
+                        <p class="err-msg">{{error}}</p>
+                    {% endfor %}
+                </label>
+            </div>
+            <div class="grid">
+                <label for="currencys_to">
+                    {{ form.currencys_to.label(class="label") }}
+                    {% if isAccept %}
+                        {{ form.currencys_to.data }}
+                        {{ form.currencys_to(class="hidden") }}
+                    {% else %}
+                        {{ form.currencys_to() }}
+                    {% endif %}
+                    {% for error in form.currencys_to.errors %}
+                        <p class="err-msg">{{error}}</p>
+                    {% endfor %}
+                </label>
+                {{ form.quantity_to() }}
+                {% if isAccept %}
+                <label for="quantity_to">
+                    {{ form.quantity_to.label }} {{ form.quantity_to.data }}
+                </label>
+                {% endif %}
+                </div>
+            <div class="grid">
+                {% if isAccept %}
+                    {{ form.calc(class="calculadora", disabled="disabled" ) }}
+                    {{ form.accept(class="calculadora") }}
+                {% else %}
+                    {{ form.calc(class="calculadora" ) }}
+                    {{ form.accept(class="calculadora", disabled="disabled")}}
+                {% endif %}
+                
+            </div>
+        </form>
+        {% if movimientos | length %}
+            <h1>Movimientos</h1>
+            <table>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Hora</th>
+                    <th colspan="2">Moneda From</th>
+                    <th colspan="2">Moneda To</th>
+                    <th>Precio Unitario</th>
+                </tr>
+                {% for movimiento in movimientos %}
+                <tr>
+                    <td>{{movimiento.fecha_alta}}</td>
+                    <td>{{movimiento.hora_alta}}</td>
+                    <td>{{movimiento.quantity_from}}</td>
+                    <td>{{movimiento.currency_from}}</td>
+                    <td>{{movimiento.quantity_to}}</td>
+                    <td>{{movimiento.currency_to}}</td>
+                    <td>{{(movimiento.quantity_from / movimiento.quantity_to) | round(8, 'floor')}} {{movimiento.currency_from}}/{{movimiento.currency_to}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
+    </div>
+</body>
+</html>
