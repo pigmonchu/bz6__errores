@@ -4,6 +4,8 @@ from la_app.forms import TransactionForm
 from tools.apicomm import getAPIData
 from tools.dbaccess import HandleDB
 from datetime import datetime
+import sqlite3
+from tools.apicomm import MyAPIError
 
 DBPATH = app.config['DBFILE']
 API_KEY = app.config['API_KEY']
@@ -46,6 +48,10 @@ def index():
 
     try:
         wallet = getWallet()
+    except sqlite3.Error as e:
+        # <procesamiento de errro por base de datos>
+    except MyAPIError as e:
+        # <procesamiento de error de la api>
     except Exception as e:
         print("**ERROR**🔧: Acceso a base de datos - wallet: {} - {}". format(type(e).__name__, e))
         mensajes.append("Error en acceso a base de datos. Consulte con el administrador.")
