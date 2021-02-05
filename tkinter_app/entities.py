@@ -1,6 +1,13 @@
 from tkinter import *
 from tkinter import ttk
 
+from configparser import ConfigParser
+
+c = ConfigParser()
+c.read('tkinter_app/config.ini')
+config = c['DEFAULT']
+
+
 class mainApp(Tk):
     def __init__(self):
         Tk.__init__(self)
@@ -10,6 +17,7 @@ class mainApp(Tk):
         self.movimientos.pack(side=TOP)
         self.transaccion = Transaccion(self)
         self.transaccion.pack(side=TOP)
+        print(config['API_KEY'])
 
 
 class Header(ttk.Frame):

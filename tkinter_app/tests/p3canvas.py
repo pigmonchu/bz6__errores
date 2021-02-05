@@ -1,6 +1,9 @@
 from tkinter import *
 from tkinter import ttk
 import datetime
+from tkinter_app.entities import config
+
+print(config['DB_FILE'])
 
 root = Tk()
 root.geometry("732x150")
